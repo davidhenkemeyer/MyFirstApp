@@ -56,7 +56,25 @@ class ItemTableViewController: UITableViewController {
         return cell
     }
     
-
+    @IBAction func unwindToList(sender: UIStoryboardSegue) {
+        let srcViewCon = sender.source as? ViewController
+        let item = srcViewCon?.item
+        if (srcViewCon != nil && item?.title != "") {
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an item
+                chores[selectedIndexPath.row] = item!
+                tableView.reloadRows(at: [selectedIndexPath], with: UITableViewRowAnimation.none)
+                
+            }
+            else {
+                // Add a new item
+                let newIndexPath = NSIndexPath(row: chores.count, section: 0)
+                chores.append(item!)
+                tableView.insertRows(at: [newIndexPath as IndexPath], with: UITableViewRowAnimation.bottom)
+            }
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -92,14 +110,25 @@ class ItemTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowDetail" {
+            let detailVC = segue.destination as! ViewController
+            
+            // Get the cell that generated this segue
+            if let selectedCell = sender as? ItemTableViewCell {
+                let indexPath = tableView.indexPath(for: selectedCell)!
+                let selectedItem = chores[indexPath.row]
+                detailVC.item = selectedItem
+            }
+        }
+        else if segue.identifier == "AddItem" {
+            
+        }
     }
-    */
-
 }
