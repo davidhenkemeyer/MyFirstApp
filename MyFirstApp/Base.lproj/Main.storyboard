@@ -37,6 +37,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="nameLabel" destination="zIA-LH-XMH" id="N1a-ep-TIq"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="Mos-wg-tx3"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -48,7 +49,7 @@
                     <navigationItem key="navigationItem" title="Chores" id="J6V-SA-AhH">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="iFO-ac-3Zn">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="5Cl-99-aeN"/>
+                                <segue destination="Mbg-Pj-r1f" kind="show" id="5Cl-99-aeN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -57,7 +58,7 @@
             </objects>
             <point key="canvasLocation" x="-102" y="747"/>
         </scene>
-        <!--View Controller-->
+        <!--New Chore-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MyFirstApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -66,7 +67,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="WEA-58-qN5">
-                                <rect key="frame" x="0.0" y="124" width="375" height="104.5"/>
+                                <rect key="frame" x="0.0" y="124" width="375" height="62.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToDo Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCe-WB-eEd">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="20.5"/>
@@ -80,10 +81,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CG3-99-wiS">
-                                        <rect key="frame" x="0.0" y="74.5" width="375" height="30"/>
-                                        <state key="normal" title="Submit"/>
-                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -95,14 +92,30 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="New Chore" id="K5r-mp-Bkz">
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="Cca-tj-drK"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Bhx-eg-Cxf">
+                            <connections>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="W06-rk-YI4"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="8dw-Vw-gZp">
+                            <connections>
+                                <segue destination="LLE-DJ-cM8" kind="unwind" unwindAction="unwindToListWithSender:" id="q1v-Of-Ij6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="myLabel" destination="sCe-WB-eEd" id="1c3-fV-7Cg"/>
                         <outlet property="myTextField" destination="8I3-P7-oig" id="QRb-hI-qmy"/>
+                        <outlet property="navBar" destination="K5r-mp-Bkz" id="Fbd-gg-gMG"/>
+                        <outlet property="saveButton" destination="8dw-Vw-gZp" id="Fat-SP-W1X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="LLE-DJ-cM8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="994" y="409"/>
+            <point key="canvasLocation" x="1905" y="444"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Zw2-tZ-mwE">
@@ -122,5 +135,26 @@
             </objects>
             <point key="canvasLocation" x="-640" y="-20.689655172413794"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5sJ-EG-ZPK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mbg-Pj-r1f" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="izu-1t-K73">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="dhn-su-STe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mZs-O2-l9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="993.60000000000002" y="423.68815592203902"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Mos-wg-tx3"/>
+    </inferredMetricsTieBreakers>
 </document>
